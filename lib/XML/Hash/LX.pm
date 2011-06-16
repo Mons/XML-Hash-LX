@@ -472,7 +472,7 @@ sub _h2x {
 			elsif (defined $H2X{comm} and $_ eq $H2X{comm}) {
 				push @rv, map XML::LibXML::Comment->new(defined $_ ? $_ : ''), ref $data->{$_} ? @{ $data->{$_} } : $data->{$_};
 			}
-			elsif (substr($_,0,$AL) eq $H2X{attr} ) {# and !ref $data->{$_}) {
+			elsif (substr($_,0,$AL) eq $H2X{attr} ) {
 				if ($parent) {
 					$parent->setAttribute( substr($_,1),defined $data->{$_} ? $data->{$_} : '' );
 				} else {

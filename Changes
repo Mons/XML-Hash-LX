@@ -2,6 +2,11 @@ Revision history for XML-Hash-LX
 
 TODO: make hash2xml faster
 
+0.06_01 2011-06-16
+        - Fix when attribute/cdata/comment value is empty/undef
+        - Cleanup tests (move qualitee tests to xt/*)
+        - add bt/* - benchmark testing draft
+
 0.06    2009-09-15
         Fix dist: remove cpants.pl from install
 

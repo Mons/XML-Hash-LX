@@ -509,6 +509,9 @@ sub _h2x {
 	elsif ( do { no strict 'refs'; exists ${ ref($data).'::' }{'(""'} } ) { # have string overload
 		return XML::LibXML::Text->new( "$data" );
 	}
+	elsif (ref $data and eval{ $data->isa('XML::LibXML::Node') }) {
+		return $data->cloneNode(1);
+	}
 	else {
 		_croak "Bad reference ".ref( $data ).": <$data> on $hd";
 	}

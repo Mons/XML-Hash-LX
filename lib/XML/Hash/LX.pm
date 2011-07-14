@@ -29,7 +29,7 @@ XML::Hash::LX - Convert hash to xml and xml to hash using LibXML
 
 =cut
 
-our $VERSION = '0.0601';
+our $VERSION = '0.0602';
 
 =head1 SYNOPSIS
 
@@ -524,7 +524,8 @@ sub hash2xml($;%) {
 	my $hash = shift;
 	my %opts = @_;
 	my $str = delete $opts{doc} ? 0 : 1;
-	my $doc = XML::LibXML::Document->new('1.0','utf-8');
+    my $charset = delete $opts{charset} || 'utf-8';
+	my $doc = XML::LibXML::Document->new('1.0', $charset);
 	local @H2X{keys %opts} = values %opts if @_;
 	local $AL = length $H2X{attr};
 	#use Data::Dumper;

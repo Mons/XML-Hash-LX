@@ -528,7 +528,7 @@ sub hash2xml($;%) {
 	my $hash = shift;
 	my %opts = @_;
 	my $str = delete $opts{doc} ? 0 : 1;
-    my $charset = delete $opts{charset} || 'utf-8';
+	my $charset = delete $opts{charset} || 'utf-8';
 	my $doc = XML::LibXML::Document->new('1.0', $charset);
 	local @H2X{keys %opts} = values %opts if @_;
 	local $AL = length $H2X{attr};

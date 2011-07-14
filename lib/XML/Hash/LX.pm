@@ -335,6 +335,10 @@ Options respecting convertations from hash to xml
 
 =over 4
 
+=item charset [ = 'utf-8' ]
+
+XML output charset
+
 =item attr [ = '-' ]
 
 Attribute prefix

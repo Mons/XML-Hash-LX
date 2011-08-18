@@ -1,19 +1,16 @@
 NAME
     XML::Hash::LX - Convert hash to xml and xml to hash using LibXML
 
-VERSION
-    Version 0.06
-
 SYNOPSIS
         use XML::Hash::LX;
 
         my $hash = xml2hash $xmlstring, attr => '.', text => '~';
         my $hash = xml2hash $xmldoc;
 
-    my $xmlstr = hash2html $hash, attr => '+', text => '#text';
+        my $xmlstr = hash2html $hash, attr => '+', text => '#text';
         my $xmldoc = hash2html $hash, doc => 1, attr => '+';
 
-    # Usage with XML::LibXML
+        # Usage with XML::LibXML
 
         my $doc = XML::LibXML->new->parse_string($xml);
         my $xp  = XML::LibXML::XPathContext->new($doc);
@@ -65,7 +62,7 @@ EXPORT
 
         use XML::Hash::LX ':inject';
 
-    my $doc = XML::LibXML->new->parse_string($xml);
+        my $doc = XML::LibXML->new->parse_string($xml);
         my $hash = $doc->toHash(%opts);
 
 FUNCTIONS
@@ -106,12 +103,12 @@ OPTIONS
             xml2hash( '<item>Test1<sub />Test2</item>' )
             : { item => { sub => '', '~' => 'Test1Test2' } };
 
-        # global
+            # global
             $XML::Hash::LX::X2H{join} = '+';
             xml2hash( '<item>Test1<sub />Test2</item>' )
             : { item => { sub => '', '~' => 'Test1+Test2' } };
 
-        # argument
+            # argument
             xml2hash( '<item>Test1<sub />Test2</item>', join => '+' )
             : { item => { sub => '', '~' => 'Test1+Test2' } };
 
@@ -174,6 +171,9 @@ OPTIONS
 
   %XML::Hash::LX::H2X
     Options respecting convertations from hash to xml
+
+    encoding [ = 'utf-8' ]
+        XML output encoding
 
     attr [ = '-' ]
         Attribute prefix

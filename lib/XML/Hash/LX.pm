@@ -335,9 +335,9 @@ Options respecting convertations from hash to xml
 
 =over 4
 
-=item charset [ = 'utf-8' ]
+=item encoding [ = 'utf-8' ]
 
-XML output charset
+XML output encoding
 
 =item attr [ = '-' ]
 
@@ -454,25 +454,6 @@ sub _h2x {
 				} ref $data->{$_} ? @{ $data->{$_} } : $data->{$_};
 				
 			}
-=for rem			
-			elsif ($_ eq $H2X{text}) {
-				
-				push @rv, map {
-					defined($_) ? (
-						$H2X{trim} and s/(?:^\s+|\s+$)//sg;
-						$H2X{trim} && !length($_) ? () :
-						XML::LibXML::Text->new( $_ )
-					: (),
-				} ref $data->{$_} ? @{ $data->{$_} } : $data->{$_};
-			}
-			elsif (defined $H2X{cdata} and $_ eq $H2X{cdata}) {
-				push @rv, map {
-					$H2X{trim} and s/(?:^\s+|\s+$)//sg;
-					$H2X{trim} && !length($_) ? () :
-					XML::LibXML::CDATASection->new($_)
-				} ref $data->{$_} ? @{ $data->{$_} } : $data->{$_};
-			}
-=cut
 			elsif (defined $H2X{comm} and $_ eq $H2X{comm}) {
 				push @rv, map XML::LibXML::Comment->new(defined $_ ? $_ : ''), ref $data->{$_} ? @{ $data->{$_} } : $data->{$_};
 			}
@@ -528,8 +509,8 @@ sub hash2xml($;%) {
 	my $hash = shift;
 	my %opts = @_;
 	my $str = delete $opts{doc} ? 0 : 1;
-	my $charset = delete $opts{charset} || 'utf-8';
-	my $doc = XML::LibXML::Document->new('1.0', $charset);
+	my $encoding = delete $opts{encoding} || delete $opts{enc} || 'utf-8';
+	my $doc = XML::LibXML::Document->new('1.0', $encoding);
 	local @H2X{keys %opts} = values %opts if @_;
 	local $AL = length $H2X{attr};
 	#use Data::Dumper;

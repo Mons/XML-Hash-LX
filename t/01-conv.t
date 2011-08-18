@@ -6,7 +6,7 @@ BEGIN {
 	my $add = 0;
 	eval {require Test::NoWarnings;Test::NoWarnings->import; ++$add; 1 }
 		or diag "Test::NoWarnings missed, skipping no warnings test";
-	plan tests => 30 + $add;
+	plan tests => 31 + $add;
 }
 
 use lib::abs '../lib';
@@ -300,5 +300,12 @@ our $xml = qq{<?xml version="1.0" encoding="utf-8"?>\n};
 		$data = hash2xml( { node => { -attr => undef, '#cdata' => undef, '/' => undef, x=>undef } }, cdata => '#cdata', comm => '/' ),
 		qq{$xml<node attr=""><!----><x/></node>\n},
 		'empty attr',
+	;
+}
+{
+	is
+		$data = hash2xml( { node => {  test => "Тест" } }, encoding => 'cp1251' ),
+		qq{<?xml version="1.0" encoding="cp1251"?>\n<node><test>\322\345\361\362</test></node>\n},
+		'encoding support',
 	;
 }

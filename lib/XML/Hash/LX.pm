@@ -29,7 +29,7 @@ XML::Hash::LX - Convert hash to xml and xml to hash using LibXML
 
 =cut
 
-our $VERSION = '0.0603';
+our $VERSION = '0.0604';
 
 =head1 SYNOPSIS
 
@@ -539,7 +539,7 @@ With default settings should produce the same output as this module. Settings ar
 
 Mons Anderson, C<< <mons at cpan.org> >>
 
-=head1 COPYRIGHT & LICENSE
+=head1 LICENSE
 
 Copyright 2009 Mons Anderson, all rights reserved.
 

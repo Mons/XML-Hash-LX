@@ -296,9 +296,9 @@ our $xml = qq{<?xml version="1.0" encoding="utf-8"?>\n};
 	;
 }
 {
-	is
+	like
 		$data = hash2xml( { node => { -attr => undef, '#cdata' => undef, '/' => undef, x=>undef } }, cdata => '#cdata', comm => '/' ),
-		qq{$xml<node attr=""><!----><x/></node>\n},
+		qr{^\Q$xml<node attr="">\E(?:<!----><x/>|<x/><!---->)</node>\n},
 		'empty attr',
 	;
 }

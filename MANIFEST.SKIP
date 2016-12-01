@@ -20,6 +20,9 @@
 \#$
 \b\.#
 \.bak$
+\.tar\.gz$
+
+^MYMETA\.*
 
 # Avoid Devel::Cover files.
 \bcover_db\b

@@ -2,6 +2,10 @@
 
 use lib::abs '../lib';
 use Test::More;
+BEGIN {
+	plan "skip_all"
+		unless $ENV{TEST_AUTHOR};
+}
 use Test::Dist;
 use Test::NoWarnings;
 chdir lib::abs::path('..');

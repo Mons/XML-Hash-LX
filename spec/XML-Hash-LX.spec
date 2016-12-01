@@ -29,7 +29,6 @@ License:      perl
 BuildRequires: %{?scl_prefix}perl(XML::LibXML)
 BuildRequires: %{?scl_prefix}perl(Module::Install)
 BuildRequires: %{?scl_prefix}perl(Test::More)
-BuildRequires: %{?scl_prefix}perl(Test::Dist)
 BuildRequires: %{?scl_prefix}perl(Test::Pod::Coverage)
 BuildRequires: %{?scl_prefix}perl(lib::abs)
 

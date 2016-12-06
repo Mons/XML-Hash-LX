@@ -4,6 +4,7 @@ use 5.006002;
 use strict;
 use warnings;
 use XML::LibXML ();
+use Types::Serialiser;
 
 our $PARSER = XML::LibXML->new();
 
@@ -490,6 +491,9 @@ sub _h2x {
 		else {
 			_croak ("Bad reference ".ref( $$data ).": <$$data> on $hd");
 		}
+	}
+	elsif (Types::Serialiser::is_bool( $data )) {
+		return XML::LibXML::Text->new( $data ? "true" : "false" );
 	}
 	elsif ( do { no strict 'refs'; exists ${ ref($data).'::' }{'(""'} } ) { # have string overload
 		return XML::LibXML::Text->new( "$data" );

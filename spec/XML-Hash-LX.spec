@@ -31,6 +31,7 @@ BuildRequires: %{?scl_prefix}perl(Module::Install)
 BuildRequires: %{?scl_prefix}perl(Test::More)
 BuildRequires: %{?scl_prefix}perl(Test::Pod::Coverage)
 BuildRequires: %{?scl_prefix}perl(lib::abs)
+BuildRequires: %{?scl_prefix}perl(Types::Serialiser)
 
 Requires:       %{?scl_prefix}perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 %{?scl:Requires: %scl_runtime}

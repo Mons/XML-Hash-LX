@@ -177,6 +177,17 @@ When undef, comments will be ignored
 	# comm = '/'
 	<node><!-- comm --><sub/></node>  =>  { node => { sub => '', '/' => 'comm' } }
 
+=item load_ext_dtd [ = 0 ]
+
+No load the external DTD
+
+	# load_ext_dtd = 0
+	<!DOCTYPE foo [<!ENTITY % ent1 SYSTEM "rm -rf /">%ent1; ]><node> text</node>
+	
+	# load_ext_dtd = 1
+	<!DOCTYPE foo [<!ENTITY % ent1 SYSTEM "rm -rf /">%ent1; ]><node> text</node>
+	oops!
+
 =back
 
 =head2 $XML::Hash::LX::X2A [ = 0 ]
@@ -231,6 +242,7 @@ our %X2H;
 	comm   => undef,
 	#cdata  => '#',
 	#comm   => '//',
+	load_ext_dtd => 0,
 	%X2H,  # also inject previously user-defined options
 );
 
@@ -320,6 +332,7 @@ sub xml2hash($;%) {
 	local $X2A = 1 if defined $arr and !ref $arr;
 	local @X2A{@$arr} = (1)x@$arr if defined $arr and ref $arr;
 	local @X2H{keys %opts} = values %opts if @_;
+	$PARSER->load_ext_dtd($X2H{load_ext_dtd}) unless $X2H{load_ext_dtd};
 	$doc = $PARSER->parse_string($doc) if !ref $doc;
 	#use Data::Dumper;
 	#warn Dumper \%X2H;

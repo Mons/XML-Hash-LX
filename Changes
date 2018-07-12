@@ -2,6 +2,9 @@ Revision history for XML-Hash-LX
 
 TODO: make hash2xml faster
 
+0.0605 2018-07-13
+        - load_ext_dtd = 0
+
 0.0604  2016-12-01
         - Fix tests
 

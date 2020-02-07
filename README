@@ -135,6 +135,32 @@ OPTIONS
             # comm = '/'
             <node><!-- comm --><sub/></node>  =>  { node => { sub => '', '/' => 'comm' } }
 
+    load_ext_dtd [ = 0 ]
+        Load the external DTD
+
+            # load_ext_dtd = 0
+            <!DOCTYPE foo [<!ENTITY % ent1 SYSTEM "rm -rf /">%ent1; ]><node> text</node>
+
+            # load_ext_dtd = 1
+            <!DOCTYPE foo [<!ENTITY % ent1 SYSTEM "rm -rf /">%ent1; ]><node> text</node>
+            oops!
+
+    expand_entities [ = 0 ]
+        Enable XInclude substitution. (See XML::LibXML::Parser)
+
+    expand_xinclude [ = 0 ]
+        Enable entities expansion. (See XML::LibXML::Parser). (Enabling also
+        enables load_ext_dtd)
+
+    validation [ = 0 ]
+        Enable validating with the DTD. (See XML::LibXML::Parser)
+
+    no_network [ = 1 ]
+        Forbid network access; (See XML::LibXML::Parser)
+
+        If true, all attempts to fetch non-local resources (such as DTD or
+        external entities) will fail
+
   $XML::Hash::LX::X2A [ = 0 ]
     Global array casing
 
@@ -231,8 +257,8 @@ SEE ALSO
 AUTHOR
     Mons Anderson, "<mons at cpan.org>"
 
-COPYRIGHT & LICENSE
-    Copyright 2009 Mons Anderson, all rights reserved.
+LICENSE
+    Copyright 2009-2020 Mons Anderson, all rights reserved.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

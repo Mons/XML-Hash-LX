@@ -25,10 +25,10 @@ no_index:
 provides:
   XML::Hash::LX:
     file: lib/XML/Hash/LX.pm
-    version: '0.0604'
+    version: '0.07'
 requires:
   XML::LibXML: 0
   perl: 5.6.2
 resources:
   license: http://dev.perl.org/licenses/
-version: '0.0605'
+version: '0.07'

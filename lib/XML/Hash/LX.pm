@@ -30,7 +30,7 @@ XML::Hash::LX - Convert hash to xml and xml to hash using LibXML
 
 =cut
 
-our $VERSION = '0.0605';
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
@@ -179,7 +179,7 @@ When undef, comments will be ignored
 
 =item load_ext_dtd [ = 0 ]
 
-No load the external DTD
+Load the external DTD
 
 	# load_ext_dtd = 0
 	<!DOCTYPE foo [<!ENTITY % ent1 SYSTEM "rm -rf /">%ent1; ]><node> text</node>
@@ -187,6 +187,25 @@ No load the external DTD
 	# load_ext_dtd = 1
 	<!DOCTYPE foo [<!ENTITY % ent1 SYSTEM "rm -rf /">%ent1; ]><node> text</node>
 	oops!
+
+
+=item expand_entities [ = 0 ]
+
+Enable XInclude substitution. (See L<XML::LibXML::Parser>)
+
+=item expand_xinclude [ = 0 ]
+
+Enable entities expansion. (See L<XML::LibXML::Parser>). (Enabling also enables load_ext_dtd)
+
+=item validation [ = 0 ]
+
+Enable validating with the DTD. (See L<XML::LibXML::Parser>)
+
+=item no_network [ = 1 ]
+
+Forbid network access; (See L<XML::LibXML::Parser>)
+
+If true, all attempts to fetch non-local resources (such as DTD or external entities) will fail
 
 =back
 
@@ -243,6 +262,10 @@ our %X2H;
 	#cdata  => '#',
 	#comm   => '//',
 	load_ext_dtd => 0,
+	expand_entities => 0,
+	expand_xinclude => 0,
+	validation => 0,
+	no_network => 1,
 	%X2H,  # also inject previously user-defined options
 );
 
@@ -332,7 +355,12 @@ sub xml2hash($;%) {
 	local $X2A = 1 if defined $arr and !ref $arr;
 	local @X2A{@$arr} = (1)x@$arr if defined $arr and ref $arr;
 	local @X2H{keys %opts} = values %opts if @_;
-	$PARSER->load_ext_dtd($X2H{load_ext_dtd}) unless $X2H{load_ext_dtd};
+	$PARSER->load_ext_dtd($X2H{load_ext_dtd});
+	$PARSER->expand_entities($X2H{expand_entities});
+	$PARSER->expand_xinclude($X2H{expand_xinclude});
+	$PARSER->validation($X2H{validation});
+	$PARSER->no_network($X2H{no_network});
+
 	$doc = $PARSER->parse_string($doc) if !ref $doc;
 	#use Data::Dumper;
 	#warn Dumper \%X2H;
@@ -558,7 +586,7 @@ Mons Anderson, C<< <mons at cpan.org> >>
 
 =head1 LICENSE
 
-Copyright 2009 Mons Anderson, all rights reserved.
+Copyright 2009-2020 Mons Anderson, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

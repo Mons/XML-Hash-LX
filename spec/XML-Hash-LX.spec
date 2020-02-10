@@ -21,6 +21,7 @@
 
 Name:         %{?scl_prefix}perl-%{__module}
 Version:      %{version}
+Epoch:        1
 Release:      %{release}
 Summary:      Convert hash to xml and xml to hash using LibXML
 Group:        Development/Libraries
